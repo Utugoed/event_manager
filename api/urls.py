@@ -13,11 +13,11 @@ from users.views import CreateUserAPIView
 
 
 urlpatterns = [
-    path('events', events_list, name='get_events_list'),
-    path('events/create', create_event, name='create_event'),
-    path('events/<int:id>', get_event, name='event_detail'),
-    path('organisations', OrganisationsAPIView.as_view()),
-    path('register', CreateUserAPIView.as_view()),
-    path('token', CustomTokenObtainView.as_view(), name='token-abtain-pair'),
-    path('token/refresh', TokenRefreshView.as_view(), name='token-refresh'),
+    path('events/', events_list, name='get_events_list'),
+    path('events/create/', create_event, name='create_event'),
+    path('events/<int:id>/', get_event, name='event_detail'),
+    path('organisations/', OrganisationsAPIView.as_view()),
+    path('register/', CreateUserAPIView.as_view()),
+    path('token/', CustomTokenObtainView.as_view(), name='token-abtain-pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
 ]

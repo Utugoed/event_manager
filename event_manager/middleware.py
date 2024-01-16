@@ -3,7 +3,7 @@ import jwt
 from channels.middleware import BaseMiddleware
 from channels.db import database_sync_to_async
 from django.contrib.auth.models import AnonymousUser
-from rest_framework_simplejwt.tokens import AccessToken
+from django.utils.deprecation import MiddlewareMixin
 
 from event_manager.settings import SECRET_KEY
 from users.models import CustomUser
@@ -26,3 +26,10 @@ class WebSocketTokenMiddleware(BaseMiddleware):
         user_id = decoded_token.get('user_id')
         return await database_sync_to_async(CustomUser.objects.get)(id=user_id)
 
+class CookiesToken2AuthHeaderMiddleware(MiddlewareMixin):
+    def process_request(self, request):
+        authorization_token = request.COOKIES.get('access_token')
+        if authorization_token:
+            request.META.update({"HTTP_AUTHORIZATION": f"Bearer {authorization_token}"})
+
+#from django.http import HttpRequest
