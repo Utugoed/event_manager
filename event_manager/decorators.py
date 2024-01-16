@@ -21,5 +21,6 @@ def jwt_required(func):
         
         if not user:
             return HttpResponseForbidden("Access Forbidden: User not authenticated.")
+        request.user = user
         return func(request, *args, **kwargs)
     return wrap_view
