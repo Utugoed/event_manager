@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+</head>
+<body>
+    <textarea id="chat-output" rows="10" cols="50" readonly></textarea>
+    <input type="text" id="message-input" placeholder="Type your message">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        const chatOutput = document.getElementById('chat-output');
+        const messageInput = document.getElementById('message-input');
+
+        var socket = new WebSocket(`ws://${window.location.host}/ws/chat/{{ room_name }}/?token={{ token }}`);
+
+        socket.onopen = function (event) {
+            console.log('WebSocket connection opened:', event);
+        };
+
+        socket.onmessage = function (event) {
+            var message = JSON.parse(event.data);
+            displayMessage(message.sender, message.message);
+        };
+
+        socket.onclose = function (event) {
+            console.log('WebSocket connection closed:', event);
+        };
+
+        function sendMessage() {
+            const message = messageInput.value;
+            if (message.trim() !== '') {
+                const data = {
+                    sender: '{{ current_user.email }}',
+                    message: message,
+                };
+                socket.send(JSON.stringify(data));
+                messageInput.value = '';
+            }
+        }
+
+        function displayMessage(sender, message) {
+            chatOutput.value += `${sender}: ${message}\n`;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
+
+    </script>
+</body>
+</html>

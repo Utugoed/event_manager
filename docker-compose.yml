@@ -1,0 +1,27 @@
+version: '3'
+
+networks:
+  bridge_network:
+    driver: bridge
+
+services:
+  web_app:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis_app
+    networks:
+      - bridge_network
+
+  redis_app:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - bridge_network

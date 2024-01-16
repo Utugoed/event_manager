@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose User and Join Chat Room</title>
+</head>
+<body>
+    <h1>Choose User and Join Chat Room</h1>
+
+    <form id="chooseUserForm">
+        <label for="users">Select a user:</label>
+        <select id="users" name="user">
+            {% for user in users %}
+            <option value="{{ user.pk }}">{{ user.email }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="button" onclick="joinChatRoom()">Join Chat Room</button>
+    </form>
+
+    <script>
+        function joinChatRoom() {
+            const selectedUser = document.getElementById('users').value;
+            const selectedUserId = parseInt(selectedUser, 10);
+            const currentUserId = {{ current_user.pk }};
+            var roomName = [currentUserId, selectedUserId].sort((a, b) => a - b).join('_');
+
+            window.location.href = '/chat/' + roomName + '/';
+        }
+    </script>
+</body>
+</html>
