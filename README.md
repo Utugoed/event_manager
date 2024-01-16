@@ -24,10 +24,10 @@
 - admin/ - Admin panel
 - api/ events - List of events
 - api/ events/create - Create event
-- api/ events/<int:id> - Event detail
+- api/ events/\<int:id\> - Event detail
 - api/ organisations - List of organisations / Create organisation
 - api/ register - Create user
 - api/ token - Auth
 - api/ token/refresh - Refresh token
 - chat/ - Choose chat
-- chat/ <str:room_name> - Chat with somebody
+- chat/ \<str:room_name\> - Chat with somebody
