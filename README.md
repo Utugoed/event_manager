@@ -1,8 +1,8 @@
 ### Event manager
 
 Для запуска приложения достаточно склонировать репозиторий
-и из папки с проектом запустить Docker-Compose
-`git clone https://github.com/Utugoed/event_manager.git`
+и из папки с проектом запустить Docker-Compose\n
+`git clone https://github.com/Utugoed/event_manager.git`\n
 `docker-compose up`
 
 Есть некоторые моменты, которые я не успел исправить
@@ -17,8 +17,8 @@
   - и не настроена инициализация данных в docker-compose
 - Эндпоинты /api/events /api/events/create /api/organisations
   - доступны только авторизованным через JWT
-  - и посетить я их смогн только с Postman так как
-  - токен необходимо в заголовок Authrization
+  - и посетить я их смог только с Postman так как
+  - токен необходимо поместить в заголовок Authrization
 
 Список эндпоинтов
 - admin/ - Admin panel
