@@ -1,8 +1,8 @@
 ### Event manager
 
 Для запуска приложения достаточно склонировать репозиторий
-и из папки с проектом запустить Docker-Compose\n
-`git clone https://github.com/Utugoed/event_manager.git`\n
+и из папки с проектом запустить Docker-Compose  
+`git clone https://github.com/Utugoed/event_manager.git`  
 `docker-compose up`
 
 Есть некоторые моменты, которые я не успел исправить
